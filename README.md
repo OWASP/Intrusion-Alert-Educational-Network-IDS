@@ -94,7 +94,7 @@ Source IP: 192.168.1.5
 
 ```
 .
-├── ids.py
+├── plugin.py
 └── README.md
 ```
 
