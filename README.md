@@ -40,7 +40,7 @@ pip install scapy
 Run the script:
 
 ```bash
-sudo python ids.py
+sudo python plugin.py
 ```
 
 (Use `sudo` on Linux/macOS for packet sniffing permissions)
@@ -102,7 +102,7 @@ Source IP: 192.168.1.5
 
 ## 👨‍💻 Author
 
-Bilal El-Adawy
+Belal Eladawy
 Network Engineer & Security Researcher
 
 ---
