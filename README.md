@@ -1,4 +1,4 @@
-# 🛡️ Simple Network IDS (DoS/DDoS Detector)
+# 🛡️ Intrusion-Alert-Educational-Network-IDS
 
 A lightweight Intrusion Detection System (IDS) built with Python to monitor network traffic and detect potential DoS/DDoS attacks based on request rate per IP.
 
