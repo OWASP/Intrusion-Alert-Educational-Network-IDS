@@ -1,112 +1,122 @@
+# 🛡️ Simple Network IDS (DoS/DDoS Detector)
+
+A lightweight Intrusion Detection System (IDS) built with Python to monitor network traffic and detect potential DoS/DDoS attacks based on request rate per IP.
 
 ---
 
-# 🛡️ Intrusion Detection System (IDS) - Python Script
+## 📌 Features
 
-## 📌 Overview
-
-This project is a lightweight **Intrusion Detection System (IDS)** written in Python.
-It monitors system login attempts and network connections in real-time to detect suspicious activity such as brute-force attacks and unusual port usage.
-
----
-
-## ⚙️ Features
-
-* 🔐 Monitors failed login attempts (`/var/log/auth.log`)
-* 🚨 Detects brute-force attacks based on threshold & time window
-* 🌐 Monitors active network connections
-* ⚠️ Flags suspicious ports (e.g., 22, 23, 3389, 4444, 5555)
-* 📢 Real-time alerts in terminal
-* 📲 Optional Telegram notifications
+* 📡 Real-time packet sniffing using Scapy
+* 📊 Tracks number of requests per IP address
+* 🚨 Detects potential DoS/DDoS attacks
+* 🪟 GUI alert system using Tkinter
+* ⚡ Multi-threaded for better performance
 
 ---
 
-## 🧰 Requirements
+## 🧠 How It Works
 
-* Python 3.7+
-* Linux system (Ubuntu/Debian recommended)
-* Root or read access to system logs
+1. The script listens to all incoming IP packets.
+2. Each packet source IP is tracked.
+3. Requests are counted per second.
+4. If a specific IP exceeds the threshold (default: 100 requests/sec), an alert is triggered.
 
-### Install dependencies:
+---
+
+## ⚙️ Requirements
+
+Make sure you have Python 3 installed, then install dependencies:
 
 ```bash
-pip install psutil requests
+pip install scapy
 ```
+
+> ⚠️ Note: You may need administrative/root privileges to sniff network traffic.
 
 ---
 
-## 🚀 Usage
+## ▶️ Usage
 
-1. Clone or copy the script:
-
-```bash
-git clone <repo-url>
-cd ids-project
-```
-
-2. Run the script:
+Run the script:
 
 ```bash
-python3 ids.py
+sudo python ids.py
 ```
+
+(Use `sudo` on Linux/macOS for packet sniffing permissions)
 
 ---
 
-## ⚙️ Configuration
+## 🔧 Configuration
 
-Edit these values inside the script:
+You can adjust detection sensitivity by modifying:
 
 ```python
-LOG_FILE = "/var/log/auth.log"
-THRESHOLD_FAILED_LOGINS = 5
-TIME_WINDOW = 60
-SUSPICIOUS_PORTS = [22, 23, 3389, 4444, 5555]
-```
-
-### Telegram Alerts (Optional)
-
-Enable Telegram alerts:
-
-```python
-ENABLE_TELEGRAM = True
-BOT_TOKEN = "YOUR_BOT_TOKEN"
-CHAT_ID = "YOUR_CHAT_ID"
+THRESHOLD = 100  # Requests per second
 ```
 
 ---
 
-## 📊 How It Works
+## 🚨 Alert System
 
-### 1. Login Monitoring
+* Displays a popup window when suspicious activity is detected
+* Prints alert message in the terminal
 
-Tracks failed login attempts.
-If failures exceed threshold within a time window → alert triggered.
+Example:
 
-### 2. Network Monitoring
-
-Scans active connections.
-If suspicious ports are detected → alert triggered.
-
-### 3. Alert System
-
-Displays alerts in terminal and optionally sends Telegram messages.
+```
+Possible DDoS/DoS attack detected!
+Source IP: 192.168.1.5
+```
 
 ---
 
-## ⚠️ Disclaimer
+## ⚠️ Limitations
 
-This project is for **educational and research purposes only**.
-Do not use it in unauthorized environments or against systems you do not own or have permission to monitor.
+* May produce false positives (e.g. high traffic like downloads or streaming)
+* Detects only based on packet rate (not protocol-specific attacks)
+* GUI alerts may cause performance issues if triggered frequently
+* Requires root/admin privileges
 
 ---
 
-## 🔧 Future Improvements
+## 💡 Future Improvements
 
-* Auto IP blocking (iptables / ufw)
-* Web dashboard (Flask / FastAPI)
-* Machine learning anomaly detection
-* Centralized logging system
-* Email alert integration
+* Detect specific attack types (SYN Flood, UDP Flood)
+* Add logging system instead of GUI alerts
+* Integrate with firewall to block malicious IPs
+* Web dashboard for monitoring
+* Port-based filtering
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├── ids.py
+└── README.md
+```
+
+---
+
+## 👨‍💻 Author
+
+Bilal El-Adawy
+Network Engineer & Security Researcher
+
+---
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
+
+---
+
+## ⭐ Support
+
+If you find this project useful, consider giving it a star ⭐ on GitHub!
+
 
 ---
 
